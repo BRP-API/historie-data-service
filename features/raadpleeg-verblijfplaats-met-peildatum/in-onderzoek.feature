@@ -145,7 +145,7 @@ Achtergrond:
       En de persoon is vervolgens ingeschreven op adres 'A2' met de volgende gegevens
       | gemeente van inschrijving (09.10) | datum aanvang adreshouding (10.30) | aanduiding in onderzoek (83.10) | datum ingang onderzoek (83.20) | datum einde onderzoek (83.30) |
       | 0800                              | 20230730                           | <aanduiding onderzoek>          | 20230516                       | 20230729                      |
-      Als gba verblijfplaatshistorie wordt gezocht met de volgende parameters
+      Als verblijfplaatshistorie wordt gezocht met de volgende parameters
       | naam                | waarde                |
       | type                | RaadpleegMetPeildatum |
       | burgerservicenummer | 000000012             |
