@@ -128,10 +128,10 @@ Achtergrond:
       | naam                | waarde                |
       | type                | RaadpleegMetPeildatum |
       | burgerservicenummer | 000000012             |
-      | peildatum           | 2003-01-01            |
+      | peildatum           | 2023-01-01            |
       Dan heeft de response verblijfplaatsen met de volgende gegevens
       | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding | straat     | huisnummer | postcode | functieAdres.code | functieAdres.omschrijving | inOnderzoek.aanduidingGegevensInOnderzoek | inOnderzoek.datumIngangOnderzoek | inOnderzoek.datumEindeOnderzoek |
-      | 0800                         | Hoogeloon, Hapert en Casteren        | 20021014                 | 20230730                         | Teststraat | 1          | 1234AB   | W                 | woonadres                 | <aanduiding onderzoek>                    | 20230516                         | 20230729                        |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 20211014                 | 20230730                         | Teststraat | 1          | 1234AB   | W                 | woonadres                 | <aanduiding onderzoek>                    | 20230516                         | 20230729                        |
 
       Voorbeelden:
       | aanduiding onderzoek |
@@ -145,14 +145,14 @@ Achtergrond:
       En de persoon is vervolgens ingeschreven op adres 'A2' met de volgende gegevens
       | gemeente van inschrijving (09.10) | datum aanvang adreshouding (10.30) | aanduiding in onderzoek (83.10) | datum ingang onderzoek (83.20) | datum einde onderzoek (83.30) |
       | 0800                              | 20230730                           | <aanduiding onderzoek>          | 20230516                       | 20230729                      |
-      Als gba verblijfplaatshistorie wordt gezocht met de volgende parameters
+      Als verblijfplaatshistorie wordt gezocht met de volgende parameters
       | naam                | waarde                |
       | type                | RaadpleegMetPeildatum |
       | burgerservicenummer | 000000012             |
-      | peildatum           | 2003-01-01            |
+      | peildatum           | 2023-01-01            |
       Dan heeft de response verblijfplaatsen met de volgende gegevens
       | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding | straat     | huisnummer | postcode | functieAdres.code | functieAdres.omschrijving | inOnderzoek.aanduidingGegevensInOnderzoek | inOnderzoek.datumIngangOnderzoek | inOnderzoek.datumEindeOnderzoek |
-      | 0800                         | Hoogeloon, Hapert en Casteren        | 20021014                 | 20230730                         | Teststraat | 1          | 1234AB   | W                 | woonadres                 |                                           |                                  |                                 |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 20211014                 | 20230730                         | Teststraat | 1          | 1234AB   | W                 | woonadres                 |                                           |                                  |                                 |
 
       Voorbeelden:
       | aanduiding onderzoek |
