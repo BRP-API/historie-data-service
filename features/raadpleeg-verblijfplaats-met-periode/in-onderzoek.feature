@@ -157,7 +157,7 @@ Functionaliteit: leveren van inOnderzoek bij raadplegen met periode
       Dan heeft de response verblijfplaatsen met de volgende gegevens
       | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding | straat     | huisnummer | postcode | functieAdres.code | functieAdres.omschrijving | inOnderzoek.aanduidingGegevensInOnderzoek | inOnderzoek.datumIngangOnderzoek | inOnderzoek.datumEindeOnderzoek |
       | 0800                         | Hoogeloon, Hapert en Casteren        | 20230730                 |                                  | Teststraat | 2          | 1234CD   | W                 | woonadres                 |                                           |                                  |                                 |
-      | 0800                         | Hoogeloon, Hapert en Casteren        | 20021014                 | 20230730                         | Teststraat | 1          | 1234AB   | W                 | woonadres                 | <aanduiding onderzoek>                    | 20230516                         | 20230729                        |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 20211014                 | 20230730                         | Teststraat | 1          | 1234AB   | W                 | woonadres                 | <aanduiding onderzoek>                    | 20230516                         | 20230729                        |
 
       Voorbeelden:
       | aanduiding onderzoek |
@@ -180,7 +180,7 @@ Functionaliteit: leveren van inOnderzoek bij raadplegen met periode
       Dan heeft de response verblijfplaatsen met de volgende gegevens
       | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding | straat     | huisnummer | postcode | functieAdres.code | functieAdres.omschrijving | inOnderzoek.aanduidingGegevensInOnderzoek | inOnderzoek.datumIngangOnderzoek | inOnderzoek.datumEindeOnderzoek |
       | 0800                         | Hoogeloon, Hapert en Casteren        | 20230730                 |                                  | Teststraat | 2          | 1234CD   | W                 | woonadres                 | <aanduiding onderzoek>                    | 20230516                         | 20230729                        |
-      | 0800                         | Hoogeloon, Hapert en Casteren        | 20021014                 | 20230730                         | Teststraat | 1          | 1234AB   | W                 | woonadres                 |                                           |                                  |                                 |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 20211014                 | 20230730                         | Teststraat | 1          | 1234AB   | W                 | woonadres                 |                                           |                                  |                                 |
 
       Voorbeelden:
       | aanduiding onderzoek |
