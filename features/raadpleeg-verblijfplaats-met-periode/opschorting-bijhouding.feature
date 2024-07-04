@@ -9,7 +9,7 @@ Functionaliteit: raadplegen historie met periode op persoonslijst met opschortin
       | 0800                 | Korte straatnaam   |
 
   Regel: Voor een persoon op een logisch verwijderde persoonslijst wordt geen verblijfplaatshistorie geleverd
-    Een persoonslijst is logisch verwijderd wanneer reden opschorting bijhouding is gelijk aan "W" (wissen)
+         Een persoonslijst is logisch verwijderd wanneer reden opschorting bijhouding is gelijk aan "W" (wissen)
 
     Abstract Scenario: Gevraagde persoon heeft een logisch verwijderde persoonslijst en <sub scenario>
       Gegeven de persoon met burgerservicenummer '000000024' is ingeschreven op adres 'A1' met de volgende gegevens
@@ -54,7 +54,7 @@ Functionaliteit: raadplegen historie met periode op persoonslijst met opschortin
 
 
   Regel: Voor een persoon met afgevoerde persoonslijst wordt geen verblijfplaatshistorie geleverd
-    Een persoonslijst is afgevoerd wanneer reden opschorting bijhouding is gelijk aan "F" (fout)
+         Een persoonslijst is afgevoerd wanneer reden opschorting bijhouding is gelijk aan "F" (fout)
 
     Abstract Scenario: Gevraagde persoon heeft een afgevoerde persoonslijst en <sub scenario>
       Gegeven de persoon met burgerservicenummer '000000024' is ingeschreven op adres 'A1' met de volgende gegevens

@@ -263,10 +263,10 @@ Functionaliteit: alleen verblijfplaatsen die binnen de gevraagde periode vallen 
       | datumVan            | 2008-10-14          |
       | datumTot            | 2020-07-30          |
       Dan heeft de response verblijfplaatsen met de volgende gegevens
-      | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | adresseerbaarObjectIdentificatie | straat        | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding |functieAdres.code|functieAdres.omschrijving|
-      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000003                 | Derde straat  | 20181014                 |                                  |W|woonadres|
-      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000002                 | Tweede straat | 20160526                 | 20181014                         |W|woonadres|
-      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000001                 | Eerste straat | 20100818                 | 20160526                         |W|woonadres|
+      | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | adresseerbaarObjectIdentificatie | straat        | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding | functieAdres.code | functieAdres.omschrijving |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000003                 | Derde straat  | 20181014                 |                                  | W                 | woonadres                 |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000002                 | Tweede straat | 20160526                 | 20181014                         | W                 | woonadres                 |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000001                 | Eerste straat | 20100818                 | 20160526                         | W                 | woonadres                 |
 
     Scenario: periode ligt geheel tussen datum aanvang en datum aanvang volgende
       Gegeven de persoon met burgerservicenummer '000000012' is ingeschreven op adres 'A1' met de volgende gegevens
@@ -285,5 +285,5 @@ Functionaliteit: alleen verblijfplaatsen die binnen de gevraagde periode vallen 
       | datumVan            | 2016-07-01          |
       | datumTot            | 2017-01-01          |
       Dan heeft de response verblijfplaatsen met de volgende gegevens
-      | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | adresseerbaarObjectIdentificatie | straat | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding | functieAdres.code | functieAdres.omschrijving |
-      | 0800 | Hoogeloon, Hapert en Casteren | 0800010000000002 | Tweede straat | 20160526 | 20181014 | W | woonadres |
+      | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | adresseerbaarObjectIdentificatie | straat        | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding | functieAdres.code | functieAdres.omschrijving |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000002                 | Tweede straat | 20160526                 | 20181014                         | W                 | woonadres                 |
