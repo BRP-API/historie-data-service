@@ -1,6 +1,6 @@
 #language: nl
 
-@api @geen-protocollering
+@api @geen-protocollering @valideer-volgorde
 Functionaliteit: test dat raadplegen historie met periode bij een opeenvolgende verblijfplaatsen met gelijke of overlappende datum aanvang correct wordt geleverd
 
     Achtergrond:
