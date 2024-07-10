@@ -51,7 +51,7 @@ Functionaliteit: test dat correcte verblijfplaatshistorie wordt geleverd bij dat
       | datumTot            | 2023-12-01          |
       Dan heeft de response verblijfplaatsen met de volgende gegevens
       | gemeenteVanInschrijving.code | gemeenteVanInschrijving.omschrijving | adresseerbaarObjectIdentificatie | straat        | datumAanvangAdreshouding | datumAanvangVolgendeAdreshouding | functieAdres.code | functieAdres.omschrijving |
-      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000004                 | Vijfde straat | 20231014                 | 20240210                         | W                 | woonadres                 |
+      | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000005                 | Vijfde straat | 20231014                 | 20240210                         | W                 | woonadres                 |
       | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000004                 | Vierde straat | 20230000                 | 20231014                         | W                 | woonadres                 |
       | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000003                 | Derde straat  | 20230730                 | 20230000                         | W                 | woonadres                 |
       | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000002                 | Tweede straat | 20230516                 | 20230730                         | W                 | woonadres                 |
