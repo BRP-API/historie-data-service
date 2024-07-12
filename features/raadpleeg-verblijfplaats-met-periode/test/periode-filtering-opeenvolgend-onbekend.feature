@@ -1,6 +1,6 @@
 #language: nl
 
-@api @geen-protocollering
+@api @geen-protocollering @valideer-volgorde
 Functionaliteit: test dat alleen de juiste verblijfplaatsen worden geleverd in geval van onbekende aanvang opeenvolgende verblijfplaatsen
 
     Achtergrond:
@@ -465,6 +465,7 @@ Functionaliteit: test dat alleen de juiste verblijfplaatsen worden geleverd in g
       | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000003                 | Derde straat  | <aanvang 3>              | <aanvang 4>                      | W                 | woonadres                 |
       | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000002                 | Tweede straat | <aanvang 2>              | <aanvang 3>                      | W                 | woonadres                 |
       | 0800                         | Hoogeloon, Hapert en Casteren        | 0800010000000001                 | Eerste straat | <aanvang 1>              | <aanvang 2>                      | W                 | woonadres                 |
+      
       Voorbeelden:
       | aanvang 1 | aanvang 2 | aanvang 3 | aanvang 4 | datum van  | datum tot  | omschrijving                                                            |
       # A1+A2+A3
