@@ -3,7 +3,7 @@ version: '3.7'
 services:
   historie-data-service:
     container_name: historie-data-service
-    image: haalcentraal.azurecr.io/gba-historie-api:2.0.4-202407040735
+    image: haalcentraal.azurecr.io/gba-historie-api:2.0.5-202407120759
     environment:
       - ASPNETCORE_URLS=http://+;
       - Database__Host=postgres
