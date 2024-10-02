@@ -1,0 +1,7 @@
+services:
+  historie-data-service:
+    image: ghcr.io/brp-api/historie-data-service:latest
+    build:
+      context: .
+      dockerfile: Historie.Data.Service/Dockerfile
+      
