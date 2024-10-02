@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rvig.Data.Historie", "Rvig.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rvig.Base.App", "Rvig.Base.App\Rvig.Base.App.csproj", "{8EA7DB47-6784-4C68-9056-3AC6F08A17BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rvig.Historie.App", "Rvig.Historie.App\Rvig.Historie.App.csproj", "{DE16B07D-F68A-4B61-A608-5E00E64237CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Historie.Data.Service", "Historie.Data.Service\Historie.Data.Service.csproj", "{DE16B07D-F68A-4B61-A608-5E00E64237CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{A3D983C3-795F-403C-8DC1-A55995D867C7}"
 EndProject
