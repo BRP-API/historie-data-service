@@ -3,22 +3,20 @@ version: '3.7'
 services:
   historie-data-service:
     container_name: historie-data-service
-    image: ghcr.io/brp-api/historie-data-service:2.0.4-latest
+    image: ghcr.io/brp-api/historie-data-service:latest
     environment:
-      - ASPNETCORE_URLS=http://+;
       - Database__Host=postgres
       - Database__Username=root
       - Database__Password=root
       - Database__Database=rvig_haalcentraal_testdata
       - HaalcentraalApi__MaxSearchResults=10
+      - ASPNETCORE_URLS=http://+;
       - ProtocolleringAuthorization__UseAuthorizationChecks=false
       - ProtocolleringAuthorization__UseProtocollering=false
       - Ecs__Path=/var/log/historie-data-service.json
       - Ecs__SecuredPath=/var/log/historie-data-service-secured.json
       - Ecs__FileSizeLimitBytes=1073741824
-      - Ecs__RetainedFileCountLimit=10
-      - Serilog__MinimumLevel__Default=Warning
-      - Serilog__MinimumLevel__Override__Serilog=Information
+      # - Ecs__RetainedFileCountLimit=10
     ports:
       - "8000:80"
     volumes:
