@@ -12,7 +12,6 @@ using Rvig.Data.Historie.DatabaseModels;
 using Rvig.HaalCentraalApi.Shared.Util;
 using Rvig.HaalCentraalApi.Shared.ApiModels.Universal;
 using Rvig.Data.Base.Postgres.Mappers.Helpers;
-using Rvig.HaalCentraalApi.Historie.ApiModels.Historie;
 
 namespace Rvig.Data.Historie.Services;
 public class GetAndMapGbaHistorieService : GetAndMapGbaServiceBase, IGetAndMapGbaHistorieService
@@ -37,89 +36,24 @@ public class GetAndMapGbaHistorieService : GetAndMapGbaServiceBase, IGetAndMapGb
 	/// <returns></returns>
 	public async Task<(VerblijfplaatshistorieQueryResponse HistoryResponse, int AfnemerCode)> GetVerblijfplaatsHistorieMapByBsn(string burgerservicenummer, DateTime? dateFrom, DateTime? dateTo)
 	{
-        var mappedHistoryObjectsAndGeheimhouding = await GetHistorieMapByBsn(burgerservicenummer, dateFrom, dateTo, _dbHistorieRepo.GetVerblijfplaatsHistorieByBsn, _historieMapper.MapVerblijfplaatsHistorieFrom, _historieMapper.MapOpschortingBijhouding);
-        var verblijfplaatsen = OrderVerblijfplaatsVoorkomens(mappedHistoryObjectsAndGeheimhouding.MappedHistoryObjects)
-									?.ToList();
+		var historyData = await GetHistorieMapByBsn(
+			burgerservicenummer,
+			dateFrom,
+			dateTo,
+			_dbHistorieRepo.GetVerblijfplaatsHistorieByBsn,
+			_historieMapper.MapVerblijfplaatsHistorieFrom,
+			_historieMapper.MapOpschortingBijhouding);
 
-		return (new VerblijfplaatshistorieQueryResponse { Verblijfplaatsen = verblijfplaatsen, _PlId = mappedHistoryObjectsAndGeheimhouding.PlId, OpschortingBijhouding = mappedHistoryObjectsAndGeheimhouding.OpschortingBijhouding, GeheimhoudingPersoonsgegevens = mappedHistoryObjectsAndGeheimhouding.GeheimhoudingPersoonsgegevens }, mappedHistoryObjectsAndGeheimhouding.AfnemerCode);
-	}
-
-	/// <summary>
-	/// If you have three verblijfplaatsVoorkomen items with the following data:
-	/// A1:
-	///		PreviousLatestStartAddressDate: 2021-05-26
-	///		LatestStartAddressDate: 0000-00-00
-	///		NextLatestStartAddressDate: 2023-10-14
-	/// A2:
-	///		PreviousLatestStartAddressDate: null
-	///		LatestStartAddressDate: 2021-05-26
-	///		NextLatestStartAddressDate: 0000-00-00
-	/// A3:
-	///		PreviousLatestStartAddressDate: 0000-00-00
-	///		LatestStartAddressDate: 2023-10-14
-	///		NextLatestStartAddressDate: null
-	///
-	/// then we expect the order to be A3 -> A1 -> A2. Because having a Next with value NULL means it is the most recent one and having a Previous with value NULL means that is the first item and therefore the oldest.
-	/// Everything in between must be ordered based on the Next value.
-	/// </summary>
-	/// <param name="verblijfplaatsVoorkomens"></param>
-	/// <returns></returns>
-	private static List<GbaVerblijfplaatsVoorkomen>? OrderVerblijfplaatsVoorkomens(List<GbaVerblijfplaatsVoorkomen>? verblijfplaatsVoorkomens)
-	{
-		if (verblijfplaatsVoorkomens?.Any() == false)
+		var response = new VerblijfplaatshistorieQueryResponse
 		{
-			return verblijfplaatsVoorkomens;
-		}
+			Verblijfplaatsen = historyData.MappedHistoryObjects,
+			_PlId = historyData.PlId,
+			OpschortingBijhouding = historyData.OpschortingBijhouding,
+			GeheimhoudingPersoonsgegevens = historyData.GeheimhoudingPersoonsgegevens
+		};
 
-		// By verblijfplaatsVoorkomens logic one must have a record that has no next date (if regarding their current address) and a record has no previous date (if regarding their first address).
-		// It is possible that the current is the same as the first. For that reason we perform a .Distinct at the end of this method.
-		var firstInList = verblijfplaatsVoorkomens!.SingleOrDefault(t => t.NextLatestStartAddressDate == null);
-		var lastInList = verblijfplaatsVoorkomens!.SingleOrDefault(t => t.PreviousLatestStartAddressDate == null);
-		List<GbaVerblijfplaatsVoorkomen>? orderedList = new() {firstInList!};
-
-		orderedList.AddRange(verblijfplaatsVoorkomens!
-							  .Except(new List<GbaVerblijfplaatsVoorkomen> { firstInList!, lastInList! })
-							  .OrderByDescending(t => t.NextLatestStartAddressDate.HasValue ? (t.NextLatestStartAddressDate != DateTime.MinValue ? t.NextLatestStartAddressDate : DateTime.MaxValue.AddMilliseconds(-1)) : DateTime.MaxValue)
-							  .ToList());
-
-		if (lastInList != null)
-		{
-			orderedList.Add(lastInList!);
-		}
-
-		// firstInList can be the same as lastInList if there is only one item in verblijfplaatsVoorkomens.
-		orderedList = orderedList.Distinct()
-									 .Where(x => x != null)
-									 .ToList();
-
-		//if (orderedList.Count > 0 && firstInList == null && lastInList == null)
-		//{
-		//	orderedList.AddRange(verblijfplaatsVoorkomens!);
-		//}
-
-		return orderedList;
+		return (response, historyData.AfnemerCode);
 	}
-
-	//public async Task<PartnerhistorieQueryResponse> GetPartnerHistorieMapByBsn(string burgerservicenummer)
-	//{
-	//	var mappedHistoryObjectsAndGeheimhouding = await GetHistorieMapByBsn(burgerservicenummer, _dbHistorieRepo.GetPartnerHistorieByBsn, _historieMapper.MapPartnerHistorieFrom);
-
-	//	return new PartnerhistorieQueryResponse { Partnerhistorie = mappedHistoryObjectsAndGeheimhouding.MappedHistoryObjects, GeheimhoudingPersoonsgegevens = mappedHistoryObjectsAndGeheimhouding.GeheimhoudingPersoonsgegevens };
-	//}
-
-	//public async Task<NationalisatiehistorieQueryResponse> GetNationaliteitHistorieMapByBsn(string burgerservicenummer)
-	//{
-	//	var mappedHistoryObjectsAndGeheimhouding = await GetHistorieMapByBsn(burgerservicenummer, _dbHistorieRepo.GetNationaliteitHistorieByBsn, _historieMapper.MapNationaliteitHistorieFrom);
-
-	//	return new NationalisatiehistorieQueryResponse { Nationaliteithistorie = mappedHistoryObjectsAndGeheimhouding.MappedHistoryObjects, GeheimhoudingPersoonsgegevens = mappedHistoryObjectsAndGeheimhouding.GeheimhoudingPersoonsgegevens };
-	//}
-
-	//public async Task<VerblijfstitelhistorieQueryResponse> GetVerblijfstitelHistorieMapByBsn(string burgerservicenummer)
-	//{
-	//	var mappedHistoryObjectsAndGeheimhouding = await GetHistorieMapByBsn(burgerservicenummer, _dbHistorieRepo.GetVerblijfstitelHistorieByBsn, _historieMapper.MapVerblijfstitelHistorieFrom);
-
-	//	return new VerblijfstitelhistorieQueryResponse { Verblijfstitelhistorie = mappedHistoryObjectsAndGeheimhouding.MappedHistoryObjects, GeheimhoudingPersoonsgegevens = mappedHistoryObjectsAndGeheimhouding.GeheimhoudingPersoonsgegevens };
-	//}
 
 	/// <summary>
 	/// Returns a result object containing the mapped history objects, geheimhoudingpersoonsgegevens value from bsns, used persoonlijst Ids (plid) from bsns, opschorting from bsns and
@@ -143,6 +77,7 @@ public class GetAndMapGbaHistorieService : GetAndMapGbaServiceBase, IGetAndMapGb
 			if (dateFrom.HasValue && dateTo.HasValue)
 			{
 				dbObject.VerblijfplaatsVoorkomens = FilterObjectsByDateRange(verblijfplaatsVoorkomens, dateFrom.Value, dateTo.Value);
+				dbObject.VerblijfplaatsVoorkomens = dbObject.VerblijfplaatsVoorkomens.OrderBy(vbo => vbo.vb_volg_nr);
 			}
 			else
 			{
@@ -154,8 +89,8 @@ public class GetAndMapGbaHistorieService : GetAndMapGbaServiceBase, IGetAndMapGb
 		}
 		// It is impossible to have an empty or null array of bsns because the API request models already validate this and reject all non valid values.
 		historyObjects = historyObjects
-							.Where(x => x != null)
-							.ToList();
+			.Where(x => x != null)
+			.ToList();
 		return new HistoryResult<TMappedHistoryType> { MappedHistoryObjects = historyObjects, PlId = dbObject?.pl_id, OpschortingBijhouding = opschortingBijhouding, GeheimhoudingPersoonsgegevens = geheimhoudingPersoonsgegevens };
 	}
 
