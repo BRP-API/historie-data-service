@@ -23,7 +23,7 @@ Functionaliteit: test voor raadplegen historie met peildatum dat opschorting bij
       | type                | RaadpleegMetPeildatum |
       | burgerservicenummer | 000000024             |
       | peildatum           | 2016-07-31            |
-      Dan heeft de response geen verblijfplaatsen
+      Dan heeft de response 0 verblijfplaatsen
 
       Voorbeelden:
       | datum opschorting bijhouding | sub scenario                                           |
@@ -66,7 +66,7 @@ Functionaliteit: test voor raadplegen historie met peildatum dat opschorting bij
       | type                | RaadpleegMetPeildatum |
       | burgerservicenummer | 000000024             |
       | peildatum           | 2016-07-31            |
-      Dan heeft de response geen verblijfplaatsen
+      Dan heeft de response 0 verblijfplaatsen
 
       Voorbeelden:
       | datum opschorting bijhouding | sub scenario                                           |
