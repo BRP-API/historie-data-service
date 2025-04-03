@@ -24,7 +24,7 @@ Functionaliteit: raadplegen historie met periode op persoonslijst met opschortin
       | burgerservicenummer | 000000024           |
       | datumVan            | 2015-07-01          |
       | datumTot            | 2020-07-01          |
-      Dan heeft de response geen verblijfplaatsen
+      Dan heeft de response 0 verblijfplaatsen
 
       Voorbeelden:
       | datum opschorting bijhouding | sub scenario                                     |
@@ -69,7 +69,7 @@ Functionaliteit: raadplegen historie met periode op persoonslijst met opschortin
       | burgerservicenummer | 000000024           |
       | datumVan            | 2015-07-01          |
       | datumTot            | 2020-07-01          |
-      Dan heeft de response geen verblijfplaatsen
+      Dan heeft de response 0 verblijfplaatsen
 
       Voorbeelden:
       | datum opschorting bijhouding | sub scenario                                     |
