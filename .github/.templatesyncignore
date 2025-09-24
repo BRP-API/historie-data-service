@@ -1,5 +1,6 @@
 :!package.json
 :!package-lock.json
+:!cucumber.js
 :!.github/actions/*.*
 :!features/docs/*.*
 :!features/step_definitions/*.*
@@ -10,4 +11,5 @@
 :!.docker/db.yml
 :!.docker/db-ci.yml
 :!.docker/Dockerfile
+:!tests/*.*
 *
