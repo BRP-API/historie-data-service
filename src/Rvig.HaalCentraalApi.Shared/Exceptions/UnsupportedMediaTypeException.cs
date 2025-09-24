@@ -1,9 +1,7 @@
 using System.Net;
-using System.Runtime.Serialization;
 
 namespace Rvig.HaalCentraalApi.Shared.Exceptions
 {
-	[Serializable]
     public class UnsupportedMediaTypeException : Exception, IHaalCentraalException
     {
         public HttpStatusCode HttpStatusCode { get => HttpStatusCode.UnsupportedMediaType; }
@@ -25,10 +23,6 @@ namespace Rvig.HaalCentraalApi.Shared.Exceptions
             : base(message, innerException)
         {
             Details = message;
-        }
-
-        protected UnsupportedMediaTypeException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
         }
     }
 }
