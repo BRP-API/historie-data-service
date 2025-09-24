@@ -14,7 +14,6 @@ using static System.Net.Mime.MediaTypeNames;
 using FluentValidation.AspNetCore;
 using Rvig.Base.App.Middleware;
 using Rvig.Base.App.Services;
-using Rvig.Base.App.Authentication;
 using FluentValidation;
 using Rvig.HaalCentraalApi.Shared;
 using Rvig.HaalCentraalApi.Shared.Exceptions;
@@ -26,7 +25,6 @@ namespace Rvig.Base.App;
 
 public static class RvigBaseApp
 {
-	private static string? _currentAuthenticationType;
 	/// <summary>
 	/// Init app
 	/// </summary>
@@ -68,20 +66,6 @@ public static class RvigBaseApp
 			// Loading validators from child app.
 			validatorsToConfigure.ForEach(validator => builder.Services.AddValidatorsFromAssemblyContaining(validator));
 
-		bool useAuthorizationChecks = true;
-		if (useAuthorizationLayerFunc != null)
-		{
-			useAuthorizationChecks = useAuthorizationLayerFunc(builder);
-		}
-
-			var authnTypes = !string.IsNullOrWhiteSpace(builder.Configuration["AuthenticationTypes"])
-				? builder.Configuration["AuthenticationTypes"]!.Split(",")
-				: new List<string>().ToArray();
-			string[] authenticationTypes = useAuthorizationChecks
-				?  authnTypes
-				: new List<string>().ToArray();
-			builder = ConfigureAuth(builder, authenticationTypes);
-
 			// Add services to the container.
 			builder.Services.AddRazorPages();
 			builder.Services.AddControllersWithViews();
@@ -112,17 +96,6 @@ public static class RvigBaseApp
 
 			app.UseRouting();
 
-			if (useAuthorizationChecks)
-			{
-				app.UseAuthentication();
-				app.UseAuthorization();
-
-				if (_currentAuthenticationType?.Equals("jwtbearer") == true)
-				{
-					app.UseMiddleware<JwtBearerWwwAuthenticateMiddleware>();
-				}
-			}
-
 			// So we can grab the POST body to validate for unknown params. See ValidateUnusableQueryParamsAttribute.cs
 			app.UseMiddleware<EnableRequestBodyBufferingMiddleware>();
 
@@ -151,42 +124,5 @@ public static class RvigBaseApp
 		services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 		services.AddSingleton<IErrorResponseService, ErrorResponseService>();
 		services.AddSingleton<IHealthCheckApiService, HealthCheckApiService>();
-	}
-
-	private static WebApplicationBuilder ConfigureAuth(WebApplicationBuilder builder, IEnumerable<string> authenticationTypes)
-	{
-		if (authenticationTypes?.Any() != true)
-		{
-			// no authentication required
-			return builder;
-		}
-		else if (authenticationTypes.Count() > 1)
-		{
-			throw new CustomInvalidOperationException("More than one authentication type was defined.");
-		}
-		_currentAuthenticationType = authenticationTypes.Single().ToLower();
-
-		return _currentAuthenticationType switch
-		{
-			"basic" => ConfigureBasicAuth(builder),
-			"openidconnect" => ConfigureOpenIdConnectAuth(builder),
-			_ => throw new CustomInvalidOperationException("Unknown authentication type was defined.")
-		};
-	}
-
-	private static WebApplicationBuilder ConfigureBasicAuth(WebApplicationBuilder builder)
-	{
-		builder.Services.AddAuthentication().AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", _ => { });
-		builder.Services.AddAuthorization(options => options.DefaultPolicy = new AuthorizationPolicyBuilder("BasicAuthentication").RequireAuthenticatedUser().Build());
-
-		return builder;
-	}
-
-	private static WebApplicationBuilder ConfigureOpenIdConnectAuth(WebApplicationBuilder builder)
-	{
-		builder.Services.AddAuthentication().AddScheme<AuthenticationSchemeOptions, OpenIdConnectAuthenticationHandler>("OpenIdConnectAuthentication", _ => { });
-		builder.Services.AddAuthorization(options => options.DefaultPolicy = new AuthorizationPolicyBuilder("OpenIdConnectAuthentication").RequireAuthenticatedUser().Build());
-
-		return builder;
 	}
 }
