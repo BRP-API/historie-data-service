@@ -16,7 +16,7 @@ npx cucumber-js -f json:./test-reports/cucumber-js/step-definitions/test-result-
                 features/docs \
                 -p UnitTest \
                 > /dev/null
-if [ $? -ne 0 ]; then EXIT_CODE=1; fi
+if [[ $? -ne 0 ]]; then EXIT_CODE=1; fi
 
 
 npx cucumber-js -f json:./test-reports/cucumber-js/historie/test-result.json \
@@ -25,6 +25,7 @@ npx cucumber-js -f json:./test-reports/cucumber-js/historie/test-result.json \
                 features/raadpleeg-verblijfplaats-met-peildatum \
                 --tags "not @skip-verify" \
                 --world-parameters "$PARAMS"
+if [[ $? -ne 0 ]]; then EXIT_CODE=1; fi
 
 npx cucumber-js -f json:./test-reports/cucumber-js/historie/test-result.json \
                 -f summary:./test-reports/cucumber-js/historie/test-result-periode-summary.txt \
@@ -32,3 +33,6 @@ npx cucumber-js -f json:./test-reports/cucumber-js/historie/test-result.json \
                 features/raadpleeg-verblijfplaats-met-periode \
                 --tags "not @skip-verify" \
                 --world-parameters "$PARAMS"
+if [[ $? -ne 0 ]]; then EXIT_CODE=1; fi
+
+exit $EXIT_CODE
