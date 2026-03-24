@@ -11,10 +11,8 @@ using Rvig.Data.Base.Postgres;
 using Rvig.HaalCentraalApi.Shared.Options;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
-using FluentValidation.AspNetCore;
 using Rvig.Base.App.Middleware;
 using Rvig.Base.App.Services;
-using FluentValidation;
 using Rvig.HaalCentraalApi.Shared;
 using Rvig.HaalCentraalApi.Shared.Exceptions;
 using Rvig.Data.Base.WebApi;
@@ -64,7 +62,7 @@ public static class RvigBaseApp
 			}
 
 			// Loading validators from child app.
-			validatorsToConfigure.ForEach(validator => builder.Services.AddValidatorsFromAssemblyContaining(validator));
+			//validatorsToConfigure.ForEach(validator => builder.Services.AddValidatorsFromAssemblyContaining(validator));
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
@@ -76,7 +74,7 @@ public static class RvigBaseApp
 				options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
 			}).AddNewtonsoftJson();
 
-			builder.Services.AddFluentValidationAutoValidation();
+			//builder.Services.AddFluentValidationAutoValidation();
 
 			builder.Services.Configure<MvcOptions>(options => options.Filters.Add(new ProducesAttribute(Application.Json)));
 			builder.Services.Configure<ApiBehaviorOptions>(options => options.InvalidModelStateResponseFactory = context => new BadRequestObjectResult(context.HttpContext.RequestServices.GetService<IErrorResponseService>()?.CreateBadRequestFoutbericht(context)));
