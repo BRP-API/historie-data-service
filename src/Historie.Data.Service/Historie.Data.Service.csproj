@@ -37,10 +37,6 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.22" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Rvig.Base.App\Rvig.Base.App.csproj" />
     <ProjectReference Include="..\Rvig.Data.Base.Postgres\Rvig.Data.Base.Postgres.csproj" />
     <ProjectReference Include="..\Rvig.Data.Historie\Rvig.Data.Historie.csproj" />

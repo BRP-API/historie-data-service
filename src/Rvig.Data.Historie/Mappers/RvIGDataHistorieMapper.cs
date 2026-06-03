@@ -22,16 +22,11 @@ public interface IRvIGDataHistorieMapper
 	/// <param name="inschrijving"></param>
 	/// <returns></returns>
 	GbaOpschortingBijhouding? MapOpschortingBijhouding(lo3_pl inschrijving);
-	//IEnumerable<GbaPartnerHistorie> MapPartnerHistorieFrom(DbPersoonHistorieWrapper dbPersoonWrapper);
-	//IEnumerable<GbaNationaliteitHistorie> MapNationaliteitHistorieFrom(DbPersoonHistorieWrapper dbPersoonWrapper);
-	//IEnumerable<GbaVerblijfstitel> MapVerblijfstitelHistorieFrom(DbPersoonHistorieWrapper dbPersoonWrapper);
 }
 
-public class RvIGDataHistorieMapper : RvIGDataMapperBase, IRvIGDataHistorieMapper
+public class RvIGDataHistorieMapper(IDomeinTabellenHelper domeinTabellenHelper)
+	: RvIGDataMapperBase(domeinTabellenHelper), IRvIGDataHistorieMapper
 {
-	public RvIGDataHistorieMapper(IDomeinTabellenHelper domeinTabellenHelper) : base(domeinTabellenHelper)
-	{
-	}
     /// <summary>
     /// Maps all attributes from the database model to the gba haalcentraal historic verblijfplaatsen.
     /// </summary>
@@ -209,99 +204,4 @@ public class RvIGDataHistorieMapper : RvIGDataMapperBase, IRvIGDataHistorieMappe
 	{
 		return base.MapGbaInOnderzoek(inOnderzoekAanduiding, inOnderzoekBeginDatum, inOnderzoekEindDatum);
 	}
-
-	///// <summary>
-	///// Maps all attributes from the database model to the gba haalcentraal historic partners.
-	///// </summary>
-	//public IEnumerable<GbaPartnerHistorie> MapPartnerHistorieFrom(DbPersoonHistorieWrapper dbPersoonWrapper)
-	//   {
-	//	IEnumerable<GbaPartnerHistorie>? partners = dbPersoonWrapper.Partners.Select(partner => MapPartnerHistorie(partner))
-	//																				.Where(x => x != null);
-
-	//       if (partners?.Any() != true)
-	//       {
-	//           return new List<GbaPartnerHistorie>();
-	//       }
-
-	//       return partners.Where(x => !ObjectHelper.AllPropertiesDefault(x));
-	//}
-
-	//private async Task<GbaOntbindingHuwelijkPartnerschapHistorie?> MapOntbindingHuwelijkPartnerschapHistorie(lo3_pl_persoon dbPartner)
-	//{
-	//	var ontbindingHuwelijkPartnerschapHistorie = new GbaOntbindingHuwelijkPartnerschapHistorie();
-
-	//	foreach (var propertyName in ObjectHelper.GetPropertyNames<GbaOntbindingHuwelijkPartnerschapHistorie>())
-	//	{
-	//		switch (propertyName)
-	//		{
-	//			case nameof(GbaOntbindingHuwelijkPartnerschapHistorie.Datum):
-	//				ontbindingHuwelijkPartnerschapHistorie.Datum = GbaMappingHelper.ParseToDatumOnvolledig(dbPartner.relatie_eind_datum);
-	//				break;
-	//			case nameof(GbaOntbindingHuwelijkPartnerschapHistorie.Land):
-	//				ontbindingHuwelijkPartnerschapHistorie.Land = dbPartner.relatie_eind_land_code.HasValue ?
-	//					 new Waardetabel { Code = dbPartner.relatie_eind_land_code?.ToString().PadLeft(4, '0'), Omschrijving = dbPartner.relatie_eind_land_naam } : null;
-	//				break;
-	//			case nameof(GbaOntbindingHuwelijkPartnerschapHistorie.Plaats):
-	//				ontbindingHuwelijkPartnerschapHistorie.Plaats = await MapPlaats(dbPartner.relatie_eind_land_code, dbPartner.relatie_eind_plaats, dbPartner.relatie_eind_plaats_naam);
-	//				break;
-	//			case nameof(GbaOntbindingHuwelijkPartnerschapHistorie.Reden): // TODOd
-	//				ontbindingHuwelijkPartnerschapHistorie.Reden = !string.IsNullOrWhiteSpace(dbPartner.relatie_eind_reden_oms)
-	//					? new Waardetabel { Code = dbPartner.relatie_eind_reden, Omschrijving = dbPartner.relatie_eind_reden_oms }
-	//					: null;
-	//				break;
-	//			default:
-	//				throw new CustomNotImplementedException($"Mapping not implemented for {nameof(GbaOntbindingHuwelijkPartnerschap)} property {propertyName}");
-	//		}
-	//	}
-
-	//	return ObjectHelper.InstanceOrNullWhenDefault(ontbindingHuwelijkPartnerschapHistorie);
-	//}
-
-	///// <summary>
-	///// Maps all attributes from the database model to the gba haalcentraal historic partners.
-	///// </summary>
-	//public IEnumerable<GbaNationaliteitHistorie> MapNationaliteitHistorieFrom(DbPersoonHistorieWrapper dbPersoonWrapper)
-	//{
-	//	throw new CustomNotImplementedException("Reimplement nationaliteiten history mapping.");
-	//	//IEnumerable<GbaNationaliteitHistorie>? nationaliteiten = MapNationaliteiten<GbaNationaliteitHistorie>(dbPersoonWrapper.Nationaliteiten, true);
-
-	// //      if (nationaliteiten?.Any() != true)
-	// //      {
-	// //          return new List<GbaNationaliteitHistorie>();
-	// //      }
-
-	// //      return nationaliteiten.Where(x => !ObjectHelper.AllPropertiesDefault(x));
-	//   }
-
-	///// <summary>
-	///// Maps all attributes from the database model to the gba haalcentraal historic partners.
-	///// </summary>
-	//public IEnumerable<GbaVerblijfstitel> MapVerblijfstitelHistorieFrom(DbPersoonHistorieWrapper dbPersoonWrapper)
-	//   {
-	//	IEnumerable<GbaVerblijfstitel> verblijfstitels = dbPersoonWrapper.Verblijfstitels.Select(verblijfstitel => MapVerblijfstitel(verblijfstitel))
-	//																							.Where(x => x != null)
-	//																							.Cast<GbaVerblijfstitel>();
-
-	//       if (verblijfstitels?.Any() != true)
-	//       {
-	//           return new List<GbaVerblijfstitel>();
-	//       }
-
-	//       return verblijfstitels.Where(x => !ObjectHelper.AllPropertiesDefault(x));
-	//}
-
-	//private GbaPartnerHistorie MapPartnerHistorie(lo3_pl_persoon partner)
-	//{
-	//	throw new CustomNotImplementedException("Reimplement partner history mapping.");
-	//	//var excludePropNames = new List<string> { nameof(GbaPartnerHistorie.OntbindingHuwelijkPartnerschapHistorie), nameof(GbaPartnerHistorie._datumAangaanHuwelijkPartnerschap), nameof(GbaPartnerHistorie._datumOntbindingHuwelijkPartnerschap) };
-	//	//var historiePartner = MapPartner<GbaPartnerHistorie>(partner, excludePropNames).gbaPartner;
-
-	//	//if (historiePartner == null)
-	//	//{
-	//	//	return new GbaPartnerHistorie();
-	//	//}
-	//	//historiePartner.OntbindingHuwelijkPartnerschapHistorie = MapOntbindingHuwelijkPartnerschapHistorie(partner);
-
-	//	//return historiePartner;
-	//}
 }
