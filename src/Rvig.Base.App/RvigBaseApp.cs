@@ -93,7 +93,6 @@ public static class RvigBaseApp
 		AppSettingsManager.Configuration = configurationManager;
 
 		services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-		//services.AddSingleton<IErrorResponseService, ErrorResponseService>();
 		services.AddSingleton<IHealthCheckApiService, HealthCheckApiService>();
 	}
 }

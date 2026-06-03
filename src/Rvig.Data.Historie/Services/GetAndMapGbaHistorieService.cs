@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Rvig.Data.Base.Postgres.Services;
-using Rvig.Data.Base.Postgres.DatabaseModels;
+﻿using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Historie.Mappers;
 using Rvig.Data.Historie.Repositories;
 using Rvig.HaalCentraalApi.Historie.Interfaces;
