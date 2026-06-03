@@ -70,15 +70,6 @@ public abstract class PostgresSqlQueryRepoBase<T>(IOptions<DatabaseOptions> data
 			records.Add(record);
 		}
 
-		if (_databaseOptions.Value.LogQueryAsMultiLiner)
-		{
-            //_loggingHelper.LogDebug("The query that was executed =  \r\n" + command.CommandText);
-        }
-		else
-		{
-            //_loggingHelper.LogDebug("The query that was executed = " + Regex.Replace(Regex.Replace(Regex.Replace(command.CommandText, "\r\n", ""), "\n", ""), "\t", " "));
-        }
-
         return records;
 	}
 

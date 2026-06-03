@@ -20,7 +20,7 @@ public abstract class PostgresRepoBase(IOptions<DatabaseOptions> databaseOptions
 		return DapperQueryAsync<TDataObject>(GetConnection(), query, dynamicParameters);
 	}
 
-	private Task<IEnumerable<TDataObject>> DapperQueryAsync<TDataObject>(NpgsqlConnection connection, string query, DynamicParameters? dynamicParameters = null)
+	private static Task<IEnumerable<TDataObject>> DapperQueryAsync<TDataObject>(NpgsqlConnection connection, string query, DynamicParameters? dynamicParameters = null)
 	{
 		try
 		{
@@ -37,7 +37,7 @@ public abstract class PostgresRepoBase(IOptions<DatabaseOptions> databaseOptions
 		}
 	}
 
-	protected async Task OpenConnectionAndLog(NpgsqlConnection connection)
+	protected static async Task OpenConnectionAndLog(NpgsqlConnection connection)
 	{
 		try
 		{
