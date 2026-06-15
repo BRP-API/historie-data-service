@@ -17,7 +17,6 @@ COPY ["Historie.Data.Service/Historie.Data.Service.csproj", "Historie.Data.Servi
 COPY ["Rvig.Base.App/Rvig.Base.App.csproj", "Rvig.Base.App/"]
 COPY ["Brp.Shared.Infrastructure/Brp.Shared.Infrastructure.csproj", "Brp.Shared.Infrastructure/"]
 COPY ["Serilog.Sinks.PersistentFile/Serilog.Sinks.PersistentFile.csproj", "Serilog.Sinks.PersistentFile/"]
-COPY ["Rvig.Data.Base.WebApi/Rvig.Data.Base.WebApi.csproj", "Rvig.Data.Base.WebApi/"]
 COPY ["Rvig.Data.Base/Rvig.Data.Base.csproj", "Rvig.Data.Base/"]
 COPY ["Rvig.HaalCentraalApi.Shared/Rvig.HaalCentraalApi.Shared.csproj", "Rvig.HaalCentraalApi.Shared/"]
 COPY ["Rvig.Data.Base.Postgres/Rvig.Data.Base.Postgres.csproj", "Rvig.Data.Base.Postgres/"]

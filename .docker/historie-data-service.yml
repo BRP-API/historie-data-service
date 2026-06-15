@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   historie-data-service:
     container_name: historie-data-service

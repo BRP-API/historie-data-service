@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Rvig.Data.Base.Postgres.Repositories;
-using Rvig.Data.Base.Postgres.Services;
-using Rvig.Data.Base.Postgres.DatabaseModels;
+﻿using Rvig.Data.Base.Postgres.DatabaseModels;
 using Rvig.Data.Historie.Mappers;
 using Rvig.Data.Historie.Repositories;
 using Rvig.HaalCentraalApi.Historie.Interfaces;
 using Rvig.HaalCentraalApi.Historie.ResponseModels.Historie;
-using Rvig.HaalCentraalApi.Shared.Interfaces;
 using Rvig.HaalCentraalApi.Shared.Exceptions;
 using Rvig.Data.Historie.DatabaseModels;
 using Rvig.HaalCentraalApi.Shared.Util;
@@ -14,27 +10,19 @@ using Rvig.HaalCentraalApi.Shared.ApiModels.Universal;
 using Rvig.Data.Base.Postgres.Mappers.Helpers;
 
 namespace Rvig.Data.Historie.Services;
-public class GetAndMapGbaHistorieService : GetAndMapGbaServiceBase, IGetAndMapGbaHistorieService
+public class GetAndMapGbaHistorieService(IRvigHistorieRepo dbPersoonRepo, IRvIGDataHistorieMapper historieMapper) : IGetAndMapGbaHistorieService
 {
-	private readonly IRvigHistorieRepo _dbHistorieRepo;
-    private readonly IRvIGDataHistorieMapper _historieMapper;
+	private readonly IRvigHistorieRepo _dbHistorieRepo = dbPersoonRepo;
+    private readonly IRvIGDataHistorieMapper _historieMapper = historieMapper;
 
-    public GetAndMapGbaHistorieService(IAutorisationRepo autorisationRepo, IRvigHistorieRepo dbPersoonRepo, IRvIGDataHistorieMapper historieMapper,
-        IHttpContextAccessor httpContextAccessor, IProtocolleringService protocolleringService)
-		: base(httpContextAccessor, autorisationRepo, protocolleringService)
-    {
-        _dbHistorieRepo = dbPersoonRepo;
-        _historieMapper = historieMapper;
-    }
-
-	/// <summary>
-	/// Get verblijfplaatshistorie via burgerservicenummer and given period.
-	/// </summary>
-	/// <param name="burgerservicenummer"></param>
-	/// <param name="dateFrom"></param>
-	/// <param name="dateTo"></param>
-	/// <returns></returns>
-	public async Task<(VerblijfplaatshistorieQueryResponse HistoryResponse, int AfnemerCode)> GetVerblijfplaatsHistorieMapByBsn(string burgerservicenummer, DateTime? dateFrom, DateTime? dateTo)
+    /// <summary>
+    /// Get verblijfplaatshistorie via burgerservicenummer and given period.
+    /// </summary>
+    /// <param name="burgerservicenummer"></param>
+    /// <param name="dateFrom"></param>
+    /// <param name="dateTo"></param>
+    /// <returns></returns>
+    public async Task<(VerblijfplaatshistorieQueryResponse HistoryResponse, int AfnemerCode)> GetVerblijfplaatsHistorieMapByBsn(string burgerservicenummer, DateTime? dateFrom, DateTime? dateTo)
 	{
 		var historyData = await GetHistorieMapByBsn(
 			burgerservicenummer,

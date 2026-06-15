@@ -24,11 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.72" />
-    <PackageReference Include="Npgsql" Version="10.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Rvig.Data.Base.Postgres\Rvig.Data.Base.Postgres.csproj" />
     <ProjectReference Include="..\Rvig.HaalCentraalApi.Historie\Rvig.HaalCentraalApi.Historie.csproj" />
     <ProjectReference Include="..\Rvig.HaalCentraalApi.Shared\Rvig.HaalCentraalApi.Shared.csproj" />
